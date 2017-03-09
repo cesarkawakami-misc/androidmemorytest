@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,9 +12,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("MEMORY", String.format("maxMemory: %d", Runtime.getRuntime().maxMemory()));
-        Log.d("MEMORY", String.format("freeMemory: %d", Runtime.getRuntime().freeMemory()));
-        Log.d("MEMORY", String.format("totalMemory: %d", Runtime.getRuntime().totalMemory()));
-        Log.d("MEMORY", String.format("getMemoryClass: %d", ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).getMemoryClass()));
+
+        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        Runtime runtime = Runtime.getRuntime();
+
+        TextView text = (TextView) findViewById(R.id.mainText);
+        text.setText(String.format(
+                "getMemoryClass() = %.2f MiB\nmaxMemory() = %.2f MiB\ntotalMemory() = %.2f MiB\n",
+                (float) activityManager.getMemoryClass(),
+                ((float) runtime.maxMemory()) / 1024 / 1024,
+                ((float) runtime.totalMemory()) / 1024 / 1024
+        ));
     }
 }
