@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
         TextView text = (TextView) findViewById(R.id.mainText);
         text.setText(String.format(
-                "getMemoryClass() = %.2f MiB\nmaxMemory() = %.2f MiB\ntotalMemory() = %.2f MiB\n",
+                "getLargeMemoryClass() = %.2f MiB\ngetMemoryClass() = %.2f MiB\nmaxMemory() = %.2f MiB\ntotalMemory() = %.2f MiB\n",
+                (float) activityManager.getLargeMemoryClass(),
                 (float) activityManager.getMemoryClass(),
                 ((float) runtime.maxMemory()) / 1024 / 1024,
                 ((float) runtime.totalMemory()) / 1024 / 1024
